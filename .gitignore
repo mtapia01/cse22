@@ -1,0 +1,5 @@
+Projects/*
+.DS_Store
+.vscode
+
+!Projects/.gitkeep
