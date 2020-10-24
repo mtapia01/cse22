@@ -34,7 +34,7 @@ $("#sign-In").click(function() {
 
 	let word = ""
 	$.get('/word', {}, function(response){
-		let wordLength = response['word']
+		word = response['word']
 		wordIndex = response['length']
 		for (let i=0; i < wordIndex; i++){
 			$("#jumbo").append(`<span id= "letter${i}">_ </span>`);
@@ -53,49 +53,58 @@ wrong = 0;
 	
 	$("#gamebtn").click(function(){
 		let guess = $("#user_textbox").val();
-
-		$.get('/word_lists', {guess: guess}, function(response){
-			let letter = response["letter"]
+		console.log(guess)
+		$.get('/word_lists', {guess: guess, word: word}, function(response){
+			let user_guessed = response["user_guess"]
 			let positions = response["positions"]
-			let spot = "#letter" + positions
+			if (response == "Try Again") {
+				wrong += 1
+			}
+			if (wrong == 1) {
+				$("#head").removeClass("hidden");
+			}
+			if (wrong == 2) {
+				$("#body").removeClass("hidden");
+			}
+			if (wrong == 3) {
+				$("#left-arm").removeClass("hidden");
+			}
+			if (wrong == 4) {
+				$("#right-arm").removeClass("hidden");
+			}
+			if (wrong == 5) {
+				$("#right-leg").removeClass("hidden");
+			}
+			if (wrong == 6) {
+				$("#left-leg").removeClass("hidden");
+				$("#gameover").removeClass("hidden");
+			
+			}
+			if (response != "Try Again"){
+				for (let i=0; i < positions.length; i++){
+					let item = '#letter' + positions[i];
+					$(item).html(user_guessed);
+				}
+			}
+		})
+	})
+
+			//let spot = "#letter" + positions
 				
-			$(spot).html(letter);
+		// 	$(spot).html(letter);
 			
 
-			if (positions < 0)
-				wrong = wrong +1;
-				wrong = wrong +1
-				for (let i=0; i < positions.length; i++){
-					let item = '#word' + positions[i];
-					$(item).html(word);
+		// 	if (positions < 0)
+		// 		wrong = wrong +1;
+		// 		wrong = wrong +1
+		// 		for (let i=0; i < positions.length; i++){
+		// 			let item = '#word' + positions[i];
+		// 			$(item).html(word);
 			
 				
 				 
-				if (response == "Try Again") {
-					wrong += 1
-				}
-				if (wrong == 1) {
-					$("#head").removeClass("hidden");
-				}
-				if (wrong == 2) {
-					$("#body").removeClass("hidden");
-				}
-				if (wrong == 3) {
-					$("#left-arm").removeClass("hidden");
-				}
-				if (wrong == 4) {
-					$("#right-arm").removeClass("hidden");
-				}
-				if (wrong == 5) {
-					$("#right-leg").removeClass("hidden");
-				}
-				if (wrong == 6) {
-					$("#left-leg").removeClass("hidden");
-					$("#gameover").removeClass("hidden");
-				}
-			}
-			})
-		});
+
+
 	//});
 
 	
@@ -105,31 +114,31 @@ wrong = 0;
 	// 	}
 	// })
 	
-	$("#gamebtn").click(function(){
-		// This is getting all the right letters and storing them so they can be checked when an answer is submitted. THIS DOES NOT WORK
-		$.get('/word_lists', {}, function(response){
-			let word = response['word']
-			let positions = response['positions']
-		// This is checking to see if an answer matches with the postion of a letter from my list 
-			for (let i=0; i < positions.length; i++){
-				let item = '#word' + positions[i];
-				$(item).html(word);
-		}
-		})
-	})
+	// $("#gamebtn").click(function(){
+	// 	// This is getting all the right letters and storing them so they can be checked when an answer is submitted. THIS DOES NOT WORK
+	// 	$.get('/word_lists', {}, function(response){
+	// 		let word = response['word']
+	// 		let positions = response['positions']
+	// 	// This is checking to see if an answer matches with the postion of a letter from my list 
+	// 		for (let i=0; i < positions.length; i++){
+	// 			let item = '#word' + positions[i];
+	// 			$(item).html(word);
+	// 	}
+	// 	})
+	// })
 	
-		$("#gamebtn").click(function(){
-		$.get('/check_attempt', {'letter': letter, 'index': wordIndex}, function(response){
-			let letter = response['letter']
-			let positions = response['positions']
+	// 	$("#gamebtn").click(function(){
+	// 	$.get('/check_attempt', {'letter': letter, 'index': wordIndex}, function(response){
+	// 		let letter = response['letter']
+	// 		let positions = response['positions']
 
-			for (let i=0; i < positions.length; i++){
-				let item = '#letter' + positions[i];
-				$(item).html(letter);
-			}
+	// 		for (let i=0; i < positions.length; i++){
+	// 			let item = '#letter' + positions[i];
+	// 			$(item).html(letter);
+	// 		}
 
-		})
-	});
+	// 	})
+	// });
 		// let wrong = 0 	
 	$("#user_textbox").keypress(function(){
 		let value = $("#user_textbox").val();

@@ -67,15 +67,15 @@ def word():
 
 @app.route('/word_lists')
 def word_lists():
-	user_guess = request.args.get("user_textbox").upper()
-	word_guesed = request.args.get("word_guessed").upper()
-	position = []
-	for i in range(len(word)):
-		if user_guess == word[i]:
-			position.append(i)
-	if len(position) == 0:
+	user_guess = request.args.get("guess").upper()
+	word_guessed = request.args.get("word").upper()
+	positions = []
+	for i in range(len(word_guessed)):
+		if user_guess == word_guessed[i]:
+			positions.append(i)
+	if len(positions) == 0:
 		return "Try Again"
-	return {'user_guess': user_guess, "word": word, "position": position}
+	return {'user_guess': user_guess, "word": word_guessed, "positions": positions}
 
 @app.route('/check_attempt')
 def check_attempt():
