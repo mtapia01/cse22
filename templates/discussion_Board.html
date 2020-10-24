@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark"
+  <!-- Brand/logo -->
+  <a class="navbar-brand" href="#">
+    <img src="static/images/disc.jpg" alt="" style="width:40px;">
+  </a>
+  
+  <!-- Links -->
+  <ul class="navbar-nav">
+    <li class="nav-item">
+      <a class="nav-link" href="/">Home</a>
+    </li>
+	
+    <li class="nav-item">
+      <a class="nav-link" href="/artist_one">Artist One</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/artist_two">Artist Two</a>
+	<li class="nav-item">
+      <a class="nav-link" href="/artist_three">Artist Three</a>
+	<li class="nav-item">
+      <a class="nav-link" href="/artist_four">Artist Four</a>
+	<li class="nav-item">
+      <a class="nav-link active" href="/discussion_Board">Discussion Board</a>
+    </li>
+	<li class="nav-item">
+	  <a class="nav-link" href="/game">Game</a>
+    </li>
+  </ul>
+</nav>
+
+<div class="container-fluid" />
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Lab 1 Template</title>
+
+    <link rel="stylesheet" href="static/bootstrap/bootstrap.min.css">
+    <script src="static/jquery/jquery.js"></script>
+    <script src="static/bootstrap/bootstrap.min.js"></script>
+    <script src="static/main.js"></script>
+    <link rel="stylesheet" type="text/css" href="static/css/styles.css">
+	<div class="jumbotron text-center">
+		<h1>Discussion Board</h1>	
+		<script>
+			alert(
+			'Please Sign In to Participate');
+		</script>
+			<p>
+				Feel free to talk about music related topics but must be signed in.
+			</p>
+	</div>
+</head>
+
+<body>
+	<div class="container">
+		<div >
+			<div class="row" "container">
+				<div id="board" class="hidden" "col-sm-4">
+					<h3>Hello, what is your name?</h3> 
+					<input id="inputbox">
+					<br />
+					<br />
+					<h3>What do you want to type?</h3>
+					<input id="musicresponses">
+					<br /> 
+					<br />
+					<button id="mybtn" class="btn btn-primary">Submit</button>
+				</div>
+				<div id="posted-Comments" class="hidden" "col-sm-8">
+					<h3>Responses</h3>
+					<div id="responses" />
+				</div>
+			</div>
+		</div>
+			<div id="login-space">
+					<h3>Username</h3> 
+					<input placeholder="Username" id="username">
+					<br />
+					<br />
+					<h3>Password</h3>
+					<input type = "password" placeholder="Password" id="password">
+					<br /> 
+					<br />
+					<button id="sign-In" class="btn btn-primary">Sign In</button>
+			</div>
+		</div>
+	</div>	
+</body>
