@@ -1,8 +1,6 @@
 wordIndex = -1
 
 $(document).ready(function (){
-	// $("#gamebtn").click(function(){
-	// })
 	$("#mybtn").click(function(){
 		let name = $("#inputbox").val();
 		let nametwo = $("#musicresponses").val();
@@ -47,10 +45,12 @@ wrong = 0;
 		if (value.length > 0){
 			$("#letter_box").val("");
 		}
-	 	//)}
+	 	
 	});
 
-	
+	$("#restart").click(function(){
+
+	})
 	$("#gamebtn").click(function(){
 		let guess = $("#user_textbox").val();
 		console.log(guess)
@@ -78,7 +78,7 @@ wrong = 0;
 			if (wrong == 6) {
 				$("#left-leg").removeClass("hidden");
 				$("#gameover").removeClass("hidden");
-			
+				$("#gamebtn").addClass("hidden");
 			}
 			if (response != "Try Again"){
 				for (let i=0; i < positions.length; i++){
@@ -88,44 +88,6 @@ wrong = 0;
 			}
 		})
 	})
-
-			//let spot = "#letter" + positions
-				
-		// 	$(spot).html(letter);
-			
-
-		// 	if (positions < 0)
-		// 		wrong = wrong +1;
-		// 		wrong = wrong +1
-		// 		for (let i=0; i < positions.length; i++){
-		// 			let item = '#word' + positions[i];
-		// 			$(item).html(word);
-			
-				
-				 
-
-
-	//});
-
-	
-	// 	let value_one = $("#hangman_words").val
-	// 	if (value_one.length > 0){
-	// 		$("#hangman_words").val("");
-	// 	}
-	// })
-	
-	// $("#gamebtn").click(function(){
-	// 	// This is getting all the right letters and storing them so they can be checked when an answer is submitted. THIS DOES NOT WORK
-	// 	$.get('/word_lists', {}, function(response){
-	// 		let word = response['word']
-	// 		let positions = response['positions']
-	// 	// This is checking to see if an answer matches with the postion of a letter from my list 
-	// 		for (let i=0; i < positions.length; i++){
-	// 			let item = '#word' + positions[i];
-	// 			$(item).html(word);
-	// 	}
-	// 	})
-	// })
 	
 	// 	$("#gamebtn").click(function(){
 	// 	$.get('/check_attempt', {'letter': letter, 'index': wordIndex}, function(response){
@@ -156,7 +118,7 @@ wrong = 0;
 		}
 	})
 
-
+//Lab 4 things
 	// $("#gamebtn").click(function(){
 	// 	alert("hello") 
 	// let user_guess = $("#user_guess").val();
@@ -213,7 +175,7 @@ wrong = 0;
 	// 				$("#letter_r").addClass("hidden")
 	// 				$("#letter_five").removeClass("hidden");
 	// 			}
-				
+//End of lab 4 stuff				
 				
 	 		
 });
