@@ -38,19 +38,18 @@ $("#sign-In").click(function() {
 			$("#jumbo").append(`<span id= "letter${i}">_ </span>`);
 		}
 	});
-wrong = 0;
-	//var user_guess = document.getElementById("user_textbox").value 
+	wrong = 0;
 	$("#user_textbox").keypress(function(){
 		let value = $("#user_textbox").val();
 		if (value.length > 0){
 			$("#letter_box").val("");
 		}
-	 	
 	});
 
 	$("#restart").click(function(){
-
+		window.location.reload();
 	})
+
 	$("#gamebtn").click(function(){
 		let guess = $("#user_textbox").val();
 		console.log(guess)
@@ -79,6 +78,7 @@ wrong = 0;
 				$("#left-leg").removeClass("hidden");
 				$("#gameover").removeClass("hidden");
 				$("#gamebtn").addClass("hidden");
+				$("#restart").removeClass("hidden");
 			}
 			if (response != "Try Again"){
 				for (let i=0; i < positions.length; i++){
