@@ -5,30 +5,26 @@ $(document).ready(function (){
 		let name = $("#inputbox").val();
 		let nametwo = $("#musicresponses").val();
 		$("#responses").html("<p>"+ name + ":" + " " + nametwo + "</p>")
-								})
+})
 
-$("#sign-In").click(function() {
-	let userName = $("#username").val();
-	let passWord = $("#password").val();
-	$.get('/verify', {username: userName, password: passWord}, function(response){
-		if(response == "You have successfully signed in"){
+	$("#sign-In").click(function() {
+		let userName = $("#username").val();
+		let passWord = $("#password").val();
+		$.get('/verify', {username: userName, password: passWord}, function(response){
+			if(response == "You have successfully signed in"){
 
-			$.get('/boardroom', {}, function(signed_response){
+				$.get('/boardroom', {}, function(signed_response){
 					$("#boardroom").html(signed_response);
 					$("#login-space").addClass("hidden");
 					$("#board").removeClass("hidden");
 					$("#posted-Comments").removeClass("hidden");
 				})											
-				}
-		else{
-			alert("Try Again")
+			} 
+			else {
+				alert("Try Again")
 			}
 		})
 	})
-
-
-
-	var array = ["Halloween", "Computer", "Python", "Website"]
 
 	let word = ""
 	$.get('/word', {}, function(response){
@@ -49,10 +45,9 @@ $("#sign-In").click(function() {
 	$("#restart").click(function(){
 		window.location.reload();
 	})
-
+	let right = 0;
 	$("#gamebtn").click(function(){
 		let guess = $("#user_textbox").val();
-		console.log(guess)
 		$.get('/word_lists', {guess: guess, word: word}, function(response){
 			let user_guessed = response["user_guess"]
 			let positions = response["positions"]
@@ -83,25 +78,26 @@ $("#sign-In").click(function() {
 			if (response != "Try Again"){
 				for (let i=0; i < positions.length; i++){
 					let item = '#letter' + positions[i];
-					$(item).html(user_guessed);
+					// $(item).html(user_guessed);
+					console.log($(item).html())
+					if ($(item).html() == "_ "){
+						console.log("imhere")
+						$(item).html(user_guessed);
+						right += 1;
+						
+					}
+				}
+				console.log(right)
+				console.log(word.length)
+				if (right == word.length){
+				
+					$("#you_won").removeClass("hidden")
 				}
 			}
 		})
 	})
 	
-	// 	$("#gamebtn").click(function(){
-	// 	$.get('/check_attempt', {'letter': letter, 'index': wordIndex}, function(response){
-	// 		let letter = response['letter']
-	// 		let positions = response['positions']
 
-	// 		for (let i=0; i < positions.length; i++){
-	// 			let item = '#letter' + positions[i];
-	// 			$(item).html(letter);
-	// 		}
-
-	// 	})
-	// });
-		// let wrong = 0 	
 	$("#user_textbox").keypress(function(){
 		let value = $("#user_textbox").val();
 		if (value.length > 0){
