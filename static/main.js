@@ -78,8 +78,6 @@ $(document).ready(function (){
 			if (response != "Try Again"){
 				for (let i=0; i < positions.length; i++){
 					let item = '#letter' + positions[i];
-					// $(item).html(user_guessed);
-					console.log($(item).html())
 					if ($(item).html() == "_ "){
 						console.log("imhere")
 						$(item).html(user_guessed);
@@ -87,8 +85,7 @@ $(document).ready(function (){
 						
 					}
 				}
-				console.log(right)
-				console.log(word.length)
+				
 				if (right == word.length){
 				
 					$("#you_won").removeClass("hidden")
