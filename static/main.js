@@ -1,4 +1,5 @@
 wordIndex = -1
+let lastCommentId = -1;
 
 $(document).ready(function (){
 	$("#mybtn").click(function(){
@@ -7,6 +8,13 @@ $(document).ready(function (){
 		$("#responses").html("<p>"+ name + ":" + " " + nametwo + "</p>")
 })
 
+	$("#signUp").click(function() {
+		let newUser = $("#newUser").val();
+		let newPassword = $("#newPassword").val();
+		$.get('/verify', {username: userName, password: passWord}, function(response){
+			
+		})
+	})
 	$("#sign-In").click(function() {
 		let userName = $("#username").val();
 		let passWord = $("#password").val();
@@ -93,7 +101,32 @@ $(document).ready(function (){
 			}
 		})
 	})
-	
+	//lab 6
+	$.get('/getcomments', {}, function(response){
+		let comments = response['comment']
+
+		for (let i = lastCommentId + 1; i < comments.length; i++){
+			let name = comment[i]['name']
+			let message = comment[i]['message']
+
+			message = message.replaceAll("<", "&lt");
+			message = message.replaceAll(">", "&gt");
+
+				if (i > lastCommentId){
+				lastCommentId = i;
+				}
+			$("#responses").append(`<b>${name}</b><br>${message}<br><br>`)
+		}
+	});
+//lab 6
+	$("#dis-boardbtn").click(function(){
+		let name = $("#inputbox").val();
+		let message = $("#discussion_response").val();
+
+		$.get('/savecomment', {"name": name, "message": message}, function(response){
+			getComments();
+		})
+	});
 
 	$("#user_textbox").keypress(function(){
 		let value = $("#user_textbox").val();

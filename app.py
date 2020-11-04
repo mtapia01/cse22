@@ -5,6 +5,7 @@ app = Flask(__name__, static_folder = 'static', template_folder = 'templates')
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 CORS(app)
 
+import json
 import random
 hangman_words = ['Halloween','Computer','Python', 'Website']
 # ===============================================================================
@@ -37,7 +38,42 @@ def discussion_Board():
 @app.route('/game')
 def game():
     return render_template('game.html')
+@app.route('/signup')
+def signup():
+    return render_template('signup.html')
+	
+@app.route('/savecomments')
+def savecomment():
+	name = request.args.get('name')
+	message = request.args.get('message')
 
+	comment = {"name": name, "message": message}
+
+	string_comment = json.dumps(comment)
+
+	f = open('comments.txt', 'a')
+	f.writelines(['\n', string_comment])
+	f.close()
+	return "", 201
+
+@app.route('/getcomments')
+def files():
+	f = open('comments.txt', 'r')
+	lines = f.readlines()
+	f.close()
+
+	comments = []
+
+	for i in range(len(lines)):
+		lines[i] = lines[i].strip()
+		loadcomment = json.loads(lines[i])
+		comments.append(loadcomment)
+
+	return {"comments": comments}
+
+def findSignup():
+	newUser = []
+	newPassword = []
 
 @app.route('/verify')
 def verify():
@@ -83,33 +119,6 @@ def check_attempt():
 	position = int(request.args.get('index'))
 
 
-	# right_letter_zero = ['H','a','l','o','w','e','n']
-	# right_letter_one = ['C','o','m','p','u','t','e','r']
-	# right_letter_two = ['P','y','t','h','o','n']
-	# right_letter_three = ['W','e','b','s','i','t','e']
-	# right_letters_all = [right_letter_one + right_letter_two + right_letter_zero]
-
-	# position = []
-	
-	# for right_letter_zero in range(len(hangman_words)):
-	# 	if hangman_words[''] == right_letter_zero:
-	# 			position.append(right_letter_zero)
-	# 	else:
-	# 		return "Try Again"
-
-	# for right_letter_one in range(len(hangman_words)):
-	# 	if hangman_words[''] == right_letter_one:
-	# 			position.append(right_letter_one)
-	# 	else:
-	# 		return "Try Again"
-
-	# for right_letter_two in range(len(hangman_words)):
-	# 	if hangman_words[''] == right_letter_two:
-	# 		position.append(right_letter_two)
-	# 	else:
-	# 		return 'Try Again'
-
-	# return {'right_letters_all': right_letters_all, 'position': position}
 
 
 #This is not needed anymore. This was lab 4

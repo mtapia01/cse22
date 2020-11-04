@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark" <!-- Brand/logo -->
+	<a class="navbar-brand" href="#">
+		<img src="static/images/disc.jpg" alt="" style="width:40px;">
+  </a>
+
+		<!-- Links -->
+		<ul class="navbar-nav">
+			<li class="nav-item">
+				<a 
+					class="nav-link" 
+					href="/">Home
+				</a>
+			</li>
+
+			<li class="nav-item">
+				<a 
+					class="nav-link" 
+					href="/artist_one">Artist One
+				</a>
+			</li>
+
+			<li class="nav-item">
+				<a 
+					class="nav-link" 
+					href="/artist_two">Artist Two
+				</a>
+			<li class="nav-item">
+				<a 
+					class="nav-link" 
+					href="/artist_three">Artist Three
+				</a>
+			<li class="nav-item">
+				<a 
+					class="nav-link" 
+					href="/artist_four">Artist Four
+				</a>
+			<li 
+				class="nav-item">
+				<a 
+					class="nav-link" 
+					href="/discussion_Board">Discussion Board
+				</a>
+			</li>
+			<li 
+				class="nav-item">
+				<a 
+					class="nav-link" 
+					href="/game">Game
+				</a>
+			</li>
+	<li 
+			class="nav-item">
+		<a 
+			class="nav-link active" 
+			href="/signup">Sign Up
+		</a>
+    </li>
+			</li>
+		</ul>
+</nav>
+
+<div class="container-fluid" />
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>Lab 1 Template</title>
+
+	<link rel="stylesheet" href="static/bootstrap/bootstrap.min.css">
+	<script src="static/jquery/jquery.js"></script>
+	<script src="static/bootstrap/bootstrap.min.js"></script>
+	<script src="static/main.js"></script>
+	<link rel="stylesheet" type="text/css" href="static/css/styles.css">
+</head>
+
+<body>
+	<div class="jumbotron text-center">
+		<h1>
+			Welcome. Feel free to make an account.
+		</h1>
+	</div>
+	<div class="container">
+		<h2>
+			Please enter you information here.
+		</h2>
+		<p>
+			<b>Enter your first name</b>
+		</p>
+		<input placeholder="Name" id="newUser">
+		<br />
+		<br />
+		<p> 
+			<b>Enter a strong password </b>
+		</p>
+		<input placeholder="Password" id="newPassword">
+		<br />
+		<br />
+		<button id ="sign_up" class ="btn btn-primary">Sign Up</button>
+		<div id="board" class="hidden" "col-sm-4">
+			<h3>Hello, what is your name?</h3>
+			<input placeholder="Name" id="inputbox">
+			<br />
+			<br />
+			<h3>What do you want to type?</h3>
+			<input placeholder="Comment" id="discussion_response">
+			<br />
+			<br />
+			<button id="mybtn" class="btn btn-primary">Submit</button>
+		</div>
+		<div id="posted-Comments" class="hidden" "col-sm-8">
+			<h3>Responses</h3>
+			<div id="responses" />
+		</div>
+
+
+	
+	</div>
+</body>
