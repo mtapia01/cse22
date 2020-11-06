@@ -60,15 +60,13 @@ def savecomment():
 def files():
 	f = open('comments.txt', 'r')
 	lines = f.readlines()
-	f.close()
 
 	comments = []
-
-	for i in range(len(lines)):
-		lines[i] = lines[i].strip()
-		loadcomment = json.loads(lines[i])
-		comments.append(loadcomment)
-
+	for line in lines:
+		line = line.strip()
+		loadcomment = json.loads(line)
+		comments.append(loadcomment)	
+	f.close()
 	return {"comments": comments}
 
 def findSignup():

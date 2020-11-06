@@ -102,12 +102,13 @@ $(document).ready(function (){
 		})
 	})
 	//lab 6
-	$.get('/getcomments', {}, function(response){
-		let comments = response['comment']
+	function getComments(){
+		$.get('/getcomments', {}, function(response){
+		let comments = response['comments']
 
 		for (let i = lastCommentId + 1; i < comments.length; i++){
-			let name = comment[i]['name']
-			let message = comment[i]['message']
+			let name = comments[i]['name']
+			let message = comments[i]['message']
 
 			message = message.replaceAll("<", "&lt");
 			message = message.replaceAll(">", "&gt");
@@ -115,15 +116,18 @@ $(document).ready(function (){
 				if (i > lastCommentId){
 				lastCommentId = i;
 				}
-			$("#responses").append(`<b>${name}</b><br>${message}<br><br>`)
+			$("#responses").append(`<b>${name}</b><br>${message}<br>`)
 		}
 	});
+	}
 //lab 6
+	getComments();
+	setInterval(getComments, 5000);
 	$("#dis-boardbtn").click(function(){
 		let name = $("#inputbox").val();
 		let message = $("#discussion_response").val();
 
-		$.get('/savecomment', {"name": name, "message": message}, function(response){
+		$.get('/savecomments', {"name": name, "message": message}, function(response){
 			getComments();
 		})
 	});
