@@ -7,14 +7,6 @@ $(document).ready(function (){
 		let nametwo = $("#musicresponses").val();
 		$("#responses").html("<p>"+ name + ":" + " " + nametwo + "</p>")
 })
-
-	$("#signUp").click(function() {
-		let newUser = $("#newUser").val();
-		let newPassword = $("#newPassword").val();
-		$.get('/verify', {username: userName, password: passWord}, function(response){
-			
-		})
-	})
 	$("#sign-In").click(function() {
 		let userName = $("#username").val();
 		let passWord = $("#password").val();
@@ -39,7 +31,7 @@ $(document).ready(function (){
 		word = response['word']
 		wordIndex = response['length']
 		for (let i=0; i < wordIndex; i++){
-			$("#jumbo").append(`<span id= "letter${i}">_ </span>`);
+			$("#jumbo").prepend(`<span id= "letter${i}">_ </span>`);
 		}
 	});
 	wrong = 0;
@@ -129,6 +121,15 @@ $(document).ready(function (){
 
 		$.get('/savecomments', {"name": name, "message": message}, function(response){
 			getComments();
+		})
+	});
+
+//lab 6
+	$("#sign_up").click(function() {
+		// alert("hello") this is working
+		let newUser = $("#newUser").val();
+		let newPassword = $("#newPassword").val();
+		$.get('/verify', {newUser: newUser, newPassword: newPassword}, function(response){
 		})
 	});
 

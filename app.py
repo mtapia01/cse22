@@ -70,8 +70,17 @@ def files():
 	return {"comments": comments}
 
 def findSignup():
-	newUser = []
-	newPassword = []
+	newUser = request.args.get('newUser')
+	newPassword = request.args.get('newPassword')
+
+	newAccount = {"newUser": newUser, "newPassword": newPassword}
+	
+	string_newAccount = json.dumps(newAccount)
+
+	f = open('logincredentials.txt', 'a')
+	f.writelines(['\n', string_newAccount])
+	f.close()
+	return "", 201
 
 @app.route('/verify')
 def verify():

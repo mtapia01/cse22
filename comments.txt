@@ -1,5 +1,8 @@
 {"name": "Michael", "message": "Hello"}
-{"name": "mn", "message": "xxx"}
 {"name": "michael", "message": "testing1237"}
 {"name": "Michael", "message": "326"}
 {"name": "3", "message": "27"}
+{"name": "michael", "message": "hello"}
+{"name": "michael", "message": "hello"}
+{"name": "michael", "message": "hello 2"}
+{"name": "michael", "message": "hello3"}
