@@ -69,28 +69,75 @@ def files():
 	f.close()
 	return {"comments": comments}
 
-def findSignup():
+@app.route ('/signupaccount')
+def signup_account():
 	newUser = request.args.get('newUser')
 	newPassword = request.args.get('newPassword')
+	return signupaccount_helper(newUser, newPassword)
 
-	newAccount = {"newUser": newUser, "newPassword": newPassword}
-	
+
+def signupaccount_helper(user, password):
+	newAccount = {"newUser": user, "newPassword": password}
 	string_newAccount = json.dumps(newAccount)
 
-	f = open('logincredentials.txt', 'a')
-	f.writelines(['\n', string_newAccount])
-	f.close()
+	l = open('logincredentials.txt', 'a')
+	l.writelines(['\n', string_newAccount])
+	# print(string_newAccount)
+	l.close()
 	return "", 201
 
-@app.route('/verify')
-def verify():
-	username= request.args.get("username")
-	password= request.args.get("password")
 
-	if username == "Admin" and password == "im-In":
-		return "You have successfully signed in"
-	else:
-		return "Try Again"
+def newPassword():
+	l = open('logincredentials.txt', 'r')
+	lines = l.readlines()
+
+	newPassword = []
+
+	for line in lines:
+		lines.remove({"newUsername": newusername})
+		accountInfo = json.loads(line)
+		newPassword.append(accountInfo)	
+	l.close()
+
+	return {"newPassword": newPassword}
+
+account = {"newUser": newUser, "newPassword": newPassword}
+
+# @app.route('/loginInfo')
+# def logininfo():
+# 	l = open('logincredentials.txt', 'r')
+# 	lines = l.readlines()
+
+# 	account = []
+# 	for line in lines:
+# 		temp = json.loads(lines[i])
+# 		print(temp['newUser'])
+
+		
+@app.route('/verifyLogin')
+def verifyLogin():
+	newUser = request.args.get("newUser")
+	newPassword = request.args.get("newPassword")
+
+	return verifyNewlogin(newUser, newPassword)
+
+def verifyNewlogin(user, password):
+	#l for logincredentials.txt
+	l = open('logincredentials.txt', 'r')
+	lines = l.readlines()
+
+	for line in lines:
+		line = line.strip()
+		print(line)
+		accountInfo = json.loads(line)
+		print(accountInfo)
+		print(accountInfo['newUser'])
+		if accountInfo['newUser'] == user and accountInfo['newPassword'] == password:
+			l.close()
+			return "You have successfully signed in"
+	l.close()
+	return "Try again"
+	# Read through the diction and check if the username and password is there. If not keeping reading until the end of the file.
 
 @app.route('/boardroom')
 def boardroom():

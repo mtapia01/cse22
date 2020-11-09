@@ -126,12 +126,35 @@ $(document).ready(function (){
 
 //lab 6
 	$("#sign_up").click(function() {
-		// alert("hello") this is working
 		let newUser = $("#newUser").val();
 		let newPassword = $("#newPassword").val();
-		$.get('/verify', {newUser: newUser, newPassword: newPassword}, function(response){
+			console.log(newUser, newPassword)
+		$.get('/signupaccount', {"newUser": newUser, "newPassword": newPassword}, function(response){
+			alert("You have made an account")
+			window.location.reload();
 		})
 	});
+	
+	$("#sign_in").click(function() {
+		let userName = $("#newUser").val();
+		let passWord = $("#newPassword").val();
+		$.get('/verifyLogin', {newUser: userName, newPassword: passWord}, function(response){
+			if(response == "You have successfully signed in"){
+				
+				$.get('/boardroom', {}, function(signed_response){
+					$("#boardroom").html(signed_response);
+					$("#login-space").addClass("hidden");
+					$("#board").removeClass("hidden");
+					$("#posted-Comments").removeClass("hidden");
+				})											
+			} 
+			else {
+				alert("Try Again")
+			}
+		})
+	})
+
+	
 
 	$("#user_textbox").keypress(function(){
 		let value = $("#user_textbox").val();
