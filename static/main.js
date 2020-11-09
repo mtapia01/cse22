@@ -143,9 +143,9 @@ $(document).ready(function (){
 				
 				$.get('/boardroom', {}, function(signed_response){
 					$("#boardroom").html(signed_response);
-					$("#login-space").addClass("hidden");
 					$("#board").removeClass("hidden");
 					$("#posted-Comments").removeClass("hidden");
+					$("#sign-in-and-up").addClass("hidden");
 				})											
 			} 
 			else {

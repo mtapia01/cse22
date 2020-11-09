@@ -86,23 +86,6 @@ def signupaccount_helper(user, password):
 	l.close()
 	return "", 201
 
-
-def newPassword():
-	l = open('logincredentials.txt', 'r')
-	lines = l.readlines()
-
-	newPassword = []
-
-	for line in lines:
-		lines.remove({"newUsername": newusername})
-		accountInfo = json.loads(line)
-		newPassword.append(accountInfo)	
-	l.close()
-
-	return {"newPassword": newPassword}
-
-account = {"newUser": newUser, "newPassword": newPassword}
-
 # @app.route('/loginInfo')
 # def logininfo():
 # 	l = open('logincredentials.txt', 'r')
@@ -123,20 +106,18 @@ def verifyLogin():
 
 def verifyNewlogin(user, password):
 	#l for logincredentials.txt
-	l = open('logincredentials.txt', 'r')
-	lines = l.readlines()
-
+	q = open('logincredentials.txt', 'r')
+	lines = q.read().splitlines()
 	for line in lines:
-		line = line.strip()
-		print(line)
+		# line = line.strip()
+		if line == "":
+			continue
 		accountInfo = json.loads(line)
-		print(accountInfo)
-		print(accountInfo['newUser'])
 		if accountInfo['newUser'] == user and accountInfo['newPassword'] == password:
-			l.close()
+			q.close()
 			return "You have successfully signed in"
-	l.close()
-	return "Try again"
+	q.close()
+	return "Try Again"
 	# Read through the diction and check if the username and password is there. If not keeping reading until the end of the file.
 
 @app.route('/boardroom')
