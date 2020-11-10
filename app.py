@@ -156,9 +156,50 @@ def check_attempt():
 	letter = request.args.get('letter')
 	position = int(request.args.get('index'))
 
+#hfinn11.txt
+#lab 7 
+def count(book):
+	result = 0
+	for i in range(len(book)):
+		if book[i] != '':
+			result = result + 1
+	return result
 
+def word_count(someText):
+	someText = someText.replace('\n', ' ')
+	someText = someText.replace('--', ' ')
 
+	items = someText.split(' ')
 
+	answer = count(items)
+	return answer
+b = open('hfinn11.txt', 'r')
+book = b.read()
+b.close
+
+def findLongest(book):
+	longest = ""
+	for i in range(len(book)):
+		if len(book[i]) > len(longest):
+			longest = book[i]
+	return longest
+# This is going to show the number of words that are in the file.
+@app.route ('/countwords')
+def countwords():
+	b = open('hfinn11.txt', 'r')
+	book = b.read()
+
+	numberOfWords = word_count(book)
+	b.close
+	return {"number_of_words": numberOfWords}
+
+@app.route('/words')
+def words_func():
+	for i in range(len(bookline)):
+		bookline[i] = bookline[i].strip()
+
+	longest_word = findLongest(bookline)
+	return {'longest_word': longest_word}
 #This is not needed anymore. This was lab 4
 # @app.route('/game_check')
 # def game_check():
