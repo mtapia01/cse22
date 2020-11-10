@@ -41,6 +41,9 @@ def game():
 @app.route('/signup')
 def signup():
     return render_template('signup.html')
+@app.route('/Library')
+def library():
+    return render_template('Library.html')
 	
 @app.route('/savecomments')
 def savecomment():

@@ -154,8 +154,6 @@ $(document).ready(function (){
 		})
 	})
 
-	
-
 	$("#user_textbox").keypress(function(){
 		let value = $("#user_textbox").val();
 		if (value.length > 0){
@@ -171,7 +169,17 @@ $(document).ready(function (){
 		$("#jumbo").append('<span id= "letter${i}">_</span>')	
 		}
 	})
-
+	//lab7 
+	$("#learn-more").click(function(){
+		$("#learn-more").addClass("hidden")
+		$("#huckleberry-learn").removeClass("hidden")
+		$("#show-less").removeClass("hidden")
+	})
+	$("#show-less").click(function(){
+		$("#learn-more").removeClass("hidden")
+		$("#huckleberry-learn").addClass("hidden")
+		$("#show-less").addClass("hidden")
+	})
 //Lab 4 things
 	// $("#gamebtn").click(function(){
 	// 	alert("hello") 
