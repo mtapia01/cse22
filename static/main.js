@@ -180,6 +180,10 @@ $(document).ready(function (){
 		$("#huckleberry-learn").addClass("hidden")
 		$("#show-less").addClass("hidden")
 	})
+	$.get('/countwords', {}, function(response){
+		wordcount = response['number_of_words']
+		$("#wordcount").append("There are " + "<b>" + wordcount + "</b>" + " words!")
+	})
 //Lab 4 things
 	// $("#gamebtn").click(function(){
 	// 	alert("hello") 

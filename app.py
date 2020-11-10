@@ -173,16 +173,18 @@ def word_count(someText):
 
 	answer = count(items)
 	return answer
+
 b = open('hfinn11.txt', 'r')
 book = b.read()
 b.close
 
-def findLongest(book):
+def findLongest(myList):
 	longest = ""
-	for i in range(len(book)):
-		if len(book[i]) > len(longest):
-			longest = book[i]
+	for i in range(len(myList)):
+		if len(myList[i]) > len(longest):
+			longest = myList[i]
 	return longest
+
 # This is going to show the number of words that are in the file.
 @app.route ('/countwords')
 def countwords():
@@ -195,10 +197,14 @@ def countwords():
 
 @app.route('/words')
 def words_func():
-	for i in range(len(bookline)):
-		bookline[i] = bookline[i].strip()
+	b = open('hfinn11.txt', 'r')
+	book = b.read()
+	for i in range(len(book)):
+		book[i] = book[i].strip()
+	
 
-	longest_word = findLongest(bookline)
+	longest_word = findLongest(book)
+	b.close
 	return {'longest_word': longest_word}
 #This is not needed anymore. This was lab 4
 # @app.route('/game_check')
