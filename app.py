@@ -174,9 +174,9 @@ def word_count(someText):
 	answer = count(items)
 	return answer
 
-# b = open('hfinn11.txt', 'r')
-# book = b.read()
-# b.close
+b = open('hfinn11.txt', 'r')
+book = b.read()
+b.close
 
 def bookinfo():
 	someText = someText.replace('\n', ' ')
@@ -200,6 +200,7 @@ def longest():
 			longest = items[i]
 	return longestword
 
+# This is getting the book taking out the \n, -, :, and . to find the longest word in the book.
 @app.route('/longestwordforbook')
 def longestwords():
 	b = open('hfinn11.txt', 'r')
@@ -216,25 +217,13 @@ def longestwords():
 	
 	longest = ""
 
-	longestword = longest(items)
-
+	# longestword = longest(items)
 	# return {"longest":longestword}
 	for i in range(len(items)):
 		if len(items[i]) > len(longest):
 			longest = items[i]
-	return longest
+	return {"longest": longest}
 
-# Does not work. 
-# def findLongest(book):
-# 	longest = ""
-# 	b = open('hfinn11.txt', 'r')
-# 	book = b.read()
-# 	b.close
-# 	string_book = json.dumps(book)
-# 	for i in range(len(string_book)):
-# 		if len(string_book[i]) > len(longest):
-# 			longest = string_book[i]
-# 	return longest
 
 # This is going to show the number of words that are in the file.
 @app.route ('/countwords')
@@ -246,25 +235,17 @@ def countwords():
 	b.close
 	return {"number_of_words": numberOfWords}
 
-# @app.route('/longestwordforbook')
+
 # def longestwordforbook():
 # 	b = open('hfinn11.txt', 'r')
 # 	book = b.read()
 
-# 	someText = book.replace('\n', ' ')
-# 	someText = someText.replace('-', ' ')
-# 	someText = someText.replace('/', ' ')
-# 	someText = someText.replace(':', ' ')
-# 	someText = someText.replace('.', ' ')
-	
-# 	items = someText.split(' ')
-	
-# 	# longest = ""
+# 	for i in range(len(items)):
+# 		if len(items[i]) > len(longest):
+# 			longest = items[i]
+# 	return longest
 
-# 	longest = longestwords(items)
-# 	b.close
 
-# 	return {"longest": longest}
 
 #This is not needed anymore. This was lab 4
 # @app.route('/game_check')

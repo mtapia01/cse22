@@ -191,7 +191,7 @@ $(document).ready(function (){
 	})
 	$.get('/longestwordforbook', {}, function(response){
 		longest = response['longest']
-		$("#longestword").append("<b>" + " " + wordcount + " " + "</b>" + " is the longest word!")
+		$("#longestword").append("<b>" + " " + longest + " " + "</b>" + "is the longest word!")
 	})
 //Lab 4 things
 	// $("#gamebtn").click(function(){
