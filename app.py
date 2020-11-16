@@ -174,16 +174,67 @@ def word_count(someText):
 	answer = count(items)
 	return answer
 
-b = open('hfinn11.txt', 'r')
-book = b.read()
-b.close
+# b = open('hfinn11.txt', 'r')
+# book = b.read()
+# b.close
 
-def findLongest(myList):
+def bookinfo():
+	someText = someText.replace('\n', ' ')
+	someText = someText.replace('-', ' ')
+
+	items = someText.split(' ')
+
+	longestword = longest(items)
+	return {"longest":longestword}
+
+def longest():
+	someText = someText.replace('\n', ' ')
+	someText = someText.replace('-', ' ')
+
+	items = someText.split(' ')
+
+	longestword = longest(items)
 	longest = ""
-	for i in range(len(myList)):
-		if len(myList[i]) > len(longest):
-			longest = myList[i]
+	for i in range(len(items)):
+		if len(items[i]) > len(longest):
+			longest = items[i]
+	return longestword
+
+@app.route('/longestwordforbook')
+def longestwords():
+	b = open('hfinn11.txt', 'r')
+	book = b.read()
+	b.close
+
+	someText = book.replace('\n', ' ')
+	someText = someText.replace('-', ' ')
+	someText = someText.replace('/', ' ')
+	someText = someText.replace(':', ' ')
+	someText = someText.replace('.', ' ')
+	
+	items = someText.split(' ')
+	
+	longest = ""
+
+	longestword = longest(items)
+
+	# return {"longest":longestword}
+	for i in range(len(items)):
+		if len(items[i]) > len(longest):
+			longest = items[i]
 	return longest
+
+# Does not work. 
+# def findLongest(book):
+# 	longest = ""
+# 	b = open('hfinn11.txt', 'r')
+# 	book = b.read()
+# 	b.close
+# 	string_book = json.dumps(book)
+# 	for i in range(len(string_book)):
+# 		if len(string_book[i]) > len(longest):
+# 			longest = string_book[i]
+# 	return longest
 
 # This is going to show the number of words that are in the file.
 @app.route ('/countwords')
@@ -195,17 +246,26 @@ def countwords():
 	b.close
 	return {"number_of_words": numberOfWords}
 
-@app.route('/words')
-def words_func():
-	b = open('hfinn11.txt', 'r')
-	book = b.read()
-	for i in range(len(book)):
-		book[i] = book[i].strip()
-	
+# @app.route('/longestwordforbook')
+# def longestwordforbook():
+# 	b = open('hfinn11.txt', 'r')
+# 	book = b.read()
 
-	longest_word = findLongest(book)
-	b.close
-	return {'longest_word': longest_word}
+# 	someText = book.replace('\n', ' ')
+# 	someText = someText.replace('-', ' ')
+# 	someText = someText.replace('/', ' ')
+# 	someText = someText.replace(':', ' ')
+# 	someText = someText.replace('.', ' ')
+	
+# 	items = someText.split(' ')
+	
+# 	# longest = ""
+
+# 	longest = longestwords(items)
+# 	b.close
+
+# 	return {"longest": longest}
+
 #This is not needed anymore. This was lab 4
 # @app.route('/game_check')
 # def game_check():

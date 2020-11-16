@@ -61,7 +61,6 @@
 	</div>	
 	<div class="container">
 		<h2> Here are a list of books that I have read</h2>
-				<div class="row" "container">
 					<div  "col-sm-6">
 						<img 
 						src="static/images/huckleberryFinn.jpg"  
@@ -71,7 +70,7 @@
 						</img>
 					</div>
 				</div>
-					<button id ="learn-more" class ="btn btn-primary">Learn More!</button>
+					<button id ="learn-more" class ="btn increment-btn btn-primary">Learn More!</button>
 				<div "col-sm-6 ">
 					<div id= "huckleberry-learn" class = "hidden" >
 						<p> 
@@ -79,9 +78,14 @@
 						</p>
 						<p>Stats about the book</p>
 						<div id= "wordcount">
-
-						</div>
-							
+						</div>		
+						<div id = "longestword">	
+						</div>			
+						<p>This many people have looked at this book! 
+							<span id = "live-counter"></span>
+							<input type="text" value="" class="counter"/>
+						</p>
+														
 						<button id ="show-less" class =" hidden btn btn-primary">Show Less</button>
 					</div>	
 				</div>

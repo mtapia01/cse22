@@ -174,6 +174,11 @@ $(document).ready(function (){
 		$("#learn-more").addClass("hidden")
 		$("#huckleberry-learn").removeClass("hidden")
 		$("#show-less").removeClass("hidden")
+		$("counter.val")(parseInt($(counter.val()) + 1 ))
+		i=0; 
+		function increment() {           
+    	i++; $("counter.val").innerHTML=i;
+		}
 	})
 	$("#show-less").click(function(){
 		$("#learn-more").removeClass("hidden")
@@ -183,6 +188,10 @@ $(document).ready(function (){
 	$.get('/countwords', {}, function(response){
 		wordcount = response['number_of_words']
 		$("#wordcount").append("There are " + "<b>" + wordcount + "</b>" + " words!")
+	})
+	$.get('/longestwordforbook', {}, function(response){
+		longest = response['longest']
+		$("#longestword").append("<b>" + " " + wordcount + " " + "</b>" + " is the longest word!")
 	})
 //Lab 4 things
 	// $("#gamebtn").click(function(){
