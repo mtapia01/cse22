@@ -174,9 +174,11 @@ def word_count(someText):
 	answer = count(items)
 	return answer
 
-b = open('hfinn11.txt', 'r')
-book = b.read()
-b.close
+# b = open('hfinn11.txt', 'r')
+# book = b.read()
+
+# content_of_book = b.read()
+# b.close
 
 def bookinfo():
 	someText = someText.replace('\n', ' ')
@@ -235,6 +237,21 @@ def countwords():
 	b.close
 	return {"number_of_words": numberOfWords}
 
+@app.route('/textofbook')
+def textofbook():
+	b = open('hfinn11.txt', 'r')
+	book = b.read()
+
+	content_of_book = b.read()
+	b.close
+	someText = book.replace('\n', ' ')
+	someText = someText.replace('-', ' ')
+	someText = someText.replace('/', ' ')
+	someText = someText.replace(':', ' ')
+
+	
+	book = someText
+	return {"book": book}
 
 # def longestwordforbook():
 # 	b = open('hfinn11.txt', 'r')

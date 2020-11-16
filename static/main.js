@@ -180,6 +180,21 @@ $(document).ready(function (){
     	i++; $("counter.val").innerHTML=i;
 		}
 	})
+	$("#readbook").click(function(){
+		$("#learn-more").addClass("hidden")
+		$("#book").removeClass("hidden")
+		$("#picture-of-book").addClass("hidden")
+		$("#stopreading").removeClass("hidden")
+		$("#readbook").addClass("hidden")
+	})
+	$("#stopreading").click(function(){
+		$("#learn-more").removeClass("hidden")
+		$("#book").addClass("hidden")
+		$("#picture-of-book").removeClass("hidden")
+		$("#stopreading").addClass("hidden")
+		$("#readbook").removeClass("hidden")
+
+	})
 	$("#show-less").click(function(){
 		$("#learn-more").removeClass("hidden")
 		$("#huckleberry-learn").addClass("hidden")
@@ -193,6 +208,10 @@ $(document).ready(function (){
 		longest = response['longest']
 		$("#longestword").append("<b>" + " " + longest + " " + "</b>" + "is the longest word!")
 	})
+	$.get('/textofbook', {}, function(response){
+		let book = response['book'];
+		$("#book").html(book);
+	});
 //Lab 4 things
 	// $("#gamebtn").click(function(){
 	// 	alert("hello") 
