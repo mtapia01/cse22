@@ -295,27 +295,31 @@ def mostusedwords():
 
 	return {'frequent_word': word, "numberoftimes": max}
 
+# import app, view_counter
+@app.route('/views')
+# @view_counter.count
+def views():
+	# view_counter = 0
+	v = open('viewcounter.txt', 'w')
+	view_increaser = request.args.get("learn-more")
+	view_dict = {"view": view_increaser}
+	number_of_views = json.dumps(view_dict)
+	for view_increaser in number_of_views:
+		+ 1
+	view = v.write(number_of_views)
+	view_increaser = view
+	b.close()
+	return {"views": view_increaser}
+
 # @app.route('/views')
 # def views():
-# 	# view_counter = 0
-# 	v = open('viewcounter.txt', 'w')
 # 	view_increaser = request.args.get("addView")
 # 	view_dict = {"view": view_increaser}
 # 	number_of_views = json.dumps(view_dict)
 # 	for view_increaser in number_of_views:
 # 		+ 1
-# 	view = b.write(number_of_views)
-# 	b.close()
-# 	return number_of_views
-@app.route('/views')
-def views():
-	view_increaser = request.args.get("addView")
-	view_dict = {"view": view_increaser}
-	number_of_views = json.dumps(view_dict)
-	for view_increaser in number_of_views:
-		+ 1
 	
-	return number_of_views
+# 	return number_of_views
 
 # def longestwordforbook():
 # 	b = open('hfinn11.txt', 'r')

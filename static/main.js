@@ -208,8 +208,8 @@ $(document).ready(function (){
 		$.get('/views', {view: addView}, function(response){
 		})
 		$.get('/views', {},function(response){
-			view_counter = response[number_of_views]
-			$("views").append(view_counter)
+			view_counter = response["views"]
+			$("views-on-page").append(view_counter)
 		})
 	})
 	$.get('/countwords', {}, function(response){
