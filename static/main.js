@@ -203,13 +203,12 @@ $(document).ready(function (){
 		$("#huckleberry-learn").addClass("hidden")
 		$("#show-less").addClass("hidden")
 	})
+	// lab7
 	$("#learn-more").click(function(){
-		addView = +1
-		$.get('/views', {view: addView}, function(response){
-		})
 		$.get('/views', {},function(response){
 			view_counter = response["views"]
-			$("views-on-page").append(view_counter)
+			console.log(response)
+			$("#views-on-page").append(view_counter)
 		})
 	})
 	$.get('/countwords', {}, function(response){
@@ -223,7 +222,7 @@ $(document).ready(function (){
 	$.get('/mostusedwords', {}, function(response){
 		pop_word = response['frequent_word']
 		number_of_times_used = response['numberoftimes']
-		$("#most-used-word").append("<b>" + pop_word + "</b>" +" was the most used word." + " It was used " + "<b>" + number_of_times_used + "</b>")
+		$("#most-used-word").append(" '" + "<b>" + pop_word + " '" + "</b>" +" was the most used word." + " It was used " + "<b>" + number_of_times_used + "</b>")
 	})
 	$.get('/textofbook', {}, function(response){
 		let book = response['book'];

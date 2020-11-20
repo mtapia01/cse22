@@ -78,7 +78,6 @@ def signup_account():
 	newPassword = request.args.get('newPassword')
 	return signupaccount_helper(newUser, newPassword)
 
-
 def signupaccount_helper(user, password):
 	newAccount = {"newUser": user, "newPassword": password}
 	string_newAccount = json.dumps(newAccount)
@@ -88,17 +87,6 @@ def signupaccount_helper(user, password):
 	# print(string_newAccount)
 	l.close()
 	return "", 201
-
-# @app.route('/loginInfo')
-# def logininfo():
-# 	l = open('logincredentials.txt', 'r')
-# 	lines = l.readlines()
-
-# 	account = []
-# 	for line in lines:
-# 		temp = json.loads(lines[i])
-# 		print(temp['newUser'])
-
 		
 @app.route('/verifyLogin')
 def verifyLogin():
@@ -299,27 +287,24 @@ def mostusedwords():
 @app.route('/views')
 # @view_counter.count
 def views():
-	# view_counter = 0
-	v = open('viewcounter.txt', 'w')
-	view_increaser = request.args.get("learn-more")
-	view_dict = {"view": view_increaser}
-	number_of_views = json.dumps(view_dict)
-	for view_increaser in number_of_views:
-		+ 1
-	view = v.write(number_of_views)
-	view_increaser = view
-	b.close()
-	return {"views": view_increaser}
 
-# @app.route('/views')
-# def views():
-# 	view_increaser = request.args.get("addView")
-# 	view_dict = {"view": view_increaser}
-# 	number_of_views = json.dumps(view_dict)
-# 	for view_increaser in number_of_views:
-# 		+ 1
+	v = open('viewcounter.txt', "r")
+	lines = v.read()
+	number_of_views = json.loads(lines)
+	v.close()
+
+	views = number_of_views["views"]
+	total_views = views +1
+
+	v = open('viewcounter.txt', 'w')
+	view_dict = {"views": total_views}
+	v.write(json.dumps(view_dict))
+	v.close()
 	
-# 	return number_of_views
+	return view_dict
+
+
+
 
 # def longestwordforbook():
 # 	b = open('hfinn11.txt', 'r')
