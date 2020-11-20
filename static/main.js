@@ -174,12 +174,15 @@ $(document).ready(function (){
 		$("#learn-more").addClass("hidden")
 		$("#huckleberry-learn").removeClass("hidden")
 		$("#show-less").removeClass("hidden")
-		$("counter.val")(parseInt($(counter.val()) + 1 ))
-		i=0; 
-		function increment() {           
-    	i++; $("counter.val").innerHTML=i;
-		}
+		
 	})
+	//lab 7 
+	// $("#learn-more").click(function(){
+	// 	$.get('/views', {"view": +1 })
+	// })
+
+	
+
 	$("#readbook").click(function(){
 		$("#learn-more").addClass("hidden")
 		$("#book").removeClass("hidden")
@@ -200,13 +203,27 @@ $(document).ready(function (){
 		$("#huckleberry-learn").addClass("hidden")
 		$("#show-less").addClass("hidden")
 	})
+	$("#learn-more").click(function(){
+		addView = +1
+		$.get('/views', {view: addView}, function(response){
+		})
+		$.get('/views', {},function(response){
+			view_counter = response[number_of_views]
+			$("views").append(view_counter)
+		})
+	})
 	$.get('/countwords', {}, function(response){
 		wordcount = response['number_of_words']
 		$("#wordcount").append("There are " + "<b>" + wordcount + "</b>" + " words!")
 	})
 	$.get('/longestwordforbook', {}, function(response){
 		longest = response['longest']
-		$("#longestword").append("<b>" + " " + longest + " " + "</b>" + "is the longest word!")
+		$("#longestword").append("<b>" + " ' " + longest + " ' " + "</b>" + "is the longest word!")
+	})
+	$.get('/mostusedwords', {}, function(response){
+		pop_word = response['frequent_word']
+		number_of_times_used = response['numberoftimes']
+		$("#most-used-word").append("<b>" + pop_word + "</b>" +" was the most used word." + " It was used " + "<b>" + number_of_times_used + "</b>")
 	})
 	$.get('/textofbook', {}, function(response){
 		let book = response['book'];

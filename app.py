@@ -174,11 +174,11 @@ def word_count(someText):
 	answer = count(items)
 	return answer
 
-# b = open('hfinn11.txt', 'r')
-# book = b.read()
+b = open('hfinn11.txt', 'r')
+book = b.read()
 
-# content_of_book = b.read()
-# b.close
+content_of_book = b.read()
+b.close
 
 def bookinfo():
 	someText = someText.replace('\n', ' ')
@@ -214,6 +214,9 @@ def longestwords():
 	someText = someText.replace('/', ' ')
 	someText = someText.replace(':', ' ')
 	someText = someText.replace('.', ' ')
+	someText = someText.replace('"', ' ')
+	someText = someText.replace(',', ' ')
+
 	
 	items = someText.split(' ')
 	
@@ -242,7 +245,7 @@ def textofbook():
 	b = open('hfinn11.txt', 'r')
 	book = b.read()
 
-	content_of_book = b.read()
+	content_of_book = book
 	b.close
 	someText = book.replace('\n', ' ')
 	someText = someText.replace('-', ' ')
@@ -251,7 +254,68 @@ def textofbook():
 
 	
 	book = someText
-	return {"book": book}
+	return {"book": content_of_book}
+
+def findMostUsedWords(book):
+	b = open('hfinn11.txt', 'r')
+	book = b.read()
+	b.close()
+	frequencies = {}
+	each_word = book.split()
+
+	for i in range(len(each_word)):
+		aWord = each_word[i].upper()
+
+	if aWord in frequencies:
+		frequencies[aWord] = frequencies[aWord] + 1
+	else:
+		frequencies[aWord] = 1
+@app.route('/mostusedwords')
+def mostusedwords():
+	frequencies = {}
+	b = open('hfinn11.txt', 'r')
+	book = b.read()
+	b.close()
+	each_word = book.split()
+
+	for i in range(len(each_word)):
+		aWord = each_word[i].upper()
+		if aWord in frequencies:
+			frequencies[aWord] = frequencies[aWord] + 1
+		else:
+			frequencies[aWord] = 1
+		
+	max = 0
+	word = ""
+	
+	for i in frequencies:
+		if frequencies[i] > max:
+			max = frequencies[i]
+			word = i
+
+	return {'frequent_word': word, "numberoftimes": max}
+
+# @app.route('/views')
+# def views():
+# 	# view_counter = 0
+# 	v = open('viewcounter.txt', 'w')
+# 	view_increaser = request.args.get("addView")
+# 	view_dict = {"view": view_increaser}
+# 	number_of_views = json.dumps(view_dict)
+# 	for view_increaser in number_of_views:
+# 		+ 1
+# 	view = b.write(number_of_views)
+# 	b.close()
+# 	return number_of_views
+@app.route('/views')
+def views():
+	view_increaser = request.args.get("addView")
+	view_dict = {"view": view_increaser}
+	number_of_views = json.dumps(view_dict)
+	for view_increaser in number_of_views:
+		+ 1
+	
+	return number_of_views
 
 # def longestwordforbook():
 # 	b = open('hfinn11.txt', 'r')
