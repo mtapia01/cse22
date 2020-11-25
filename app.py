@@ -190,6 +190,61 @@ def longest():
 			longest = items[i]
 	return longestword
 
+# Book information for odyssey.txt
+@app.route('/longestwordforbookone')
+def longestwords_b1():
+	b_one = open('odyssey.txt', 'r')
+	book_one = b_one.read()
+	b_one.close
+
+	someText = book_one.replace('\n', ' ')
+	someText = someText.replace('-', ' ')
+	someText = someText.replace('/', ' ')
+	someText = someText.replace(':', ' ')
+	someText = someText.replace('.', ' ')
+	someText = someText.replace('"', ' ')
+	someText = someText.replace(',', ' ')
+
+	
+	items = someText.split(' ')
+	
+	longest = ""
+
+	# longestword = longest(items)
+	# return {"longest":longestword}
+	for i in range(len(items)):
+		if len(items[i]) > len(longest):
+			longest = items[i]
+	return {"longest": longest}
+
+@app.route('/textofbook')
+def textofbook_b1():
+	b = open('odyssey.txt', 'r')
+	book = b.read()
+
+	content_of_book = book
+	b.close
+	someText = book.replace('\n', ' ')
+	someText = someText.replace('-', ' ')
+	someText = someText.replace('/', ' ')
+	someText = someText.replace(':', ' ')
+
+	
+	book = someText
+	return {"book": content_of_book}
+
+@app.route ('/countwords')
+def countwords_b1():
+	b_one = open('odyssey.txt', 'r')
+	book_one = b_one.read()
+	
+	numberOfWords = word_count(book_one)
+	b_one.close
+	return {"number_of_words": numberOfWords}
+# end of information aobut .txt
+
+
+# Informaion about hfinn11.txt
 # This is getting the book taking out the \n, -, :, and . to find the longest word in the book.
 @app.route('/longestwordforbook')
 def longestwords():
@@ -216,7 +271,6 @@ def longestwords():
 		if len(items[i]) > len(longest):
 			longest = items[i]
 	return {"longest": longest}
-
 
 # This is going to show the number of words that are in the file.
 @app.route ('/countwords')
@@ -282,6 +336,7 @@ def mostusedwords():
 			word = i
 
 	return {'frequent_word': word, "numberoftimes": max}
+# End of information aobut hfinn11.txt
 
 # import app, view_counter
 @app.route('/views')
@@ -300,7 +355,7 @@ def views():
 	view_dict = {"views": total_views}
 	v.write(json.dumps(view_dict))
 	v.close()
-	
+
 	return view_dict
 
 
