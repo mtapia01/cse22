@@ -44,6 +44,9 @@ def signup():
 @app.route('/Library')
 def library():
     return render_template('Library.html')
+@app.route('/address_book')
+def address_book():
+	return render_template('address_book.html')
 	
 @app.route('/savecomments')
 def savecomment():
@@ -217,21 +220,21 @@ def longestwords_b1():
 			longest = items[i]
 	return {"longest": longest}
 
-@app.route('/textofbook')
-def textofbook_b1():
-	b = open('odyssey.txt', 'r')
-	book = b.read()
+# @app.route('/textofbook')
+# def textofbook_b1():
+# 	b = open('odyssey.txt', 'r')
+# 	book = b.read()
 
-	content_of_book = book
-	b.close
-	someText = book.replace('\n', ' ')
-	someText = someText.replace('-', ' ')
-	someText = someText.replace('/', ' ')
-	someText = someText.replace(':', ' ')
+# 	content_of_book = book
+# 	b.close
+# 	someText = book.replace('\n', ' ')
+# 	someText = someText.replace('-', ' ')
+# 	someText = someText.replace('/', ' ')
+# 	someText = someText.replace(':', ' ')
 
 	
-	book = someText
-	return {"book": content_of_book}
+# 	book = someText
+# 	return {"book": content_of_book}
 
 @app.route ('/countwords')
 def countwords_b1():
@@ -358,7 +361,46 @@ def views():
 
 	return view_dict
 
+c = open('contacts.csv', 'r')
+contacts = c.readlines()
+c.close
 
+for i in range(len(contacts)):
+	contacts[i] = contacts[i].strip()
+
+pretty_contacts = []
+
+for i in range(len(contacts)):
+	row = contacts[i]      # "first,last,Address,City,State,Zip,Phone 1,Phone,Email"
+	items = row.split(',')    # ["first", "last", "Address", "City", "State", "Zip", "Phone 1", "Phone", "Email"]
+	first_name = items[0]     # "first"
+	last_name = items[1]      # "last"
+	address = items[2]	      # "address"
+	city = items[3]           # "city"
+	state = items[4]		  # "state"
+	zip_code = items[5]  	  # "zip"
+	phone_one = items[6]      # "phone 1"
+	phone = items[7]	      # "phone"
+	email = items[8]		  # "email"
+
+
+	pretty_row = {'first_name': first_name, 'last_name': last_name, 'address': address, 'city': city, 'state': state, 'zip': zip_code, 'phone_one': phone_one, 'phone': phone, 'email': email}
+	pretty_contacts.append(pretty_row)
+
+@app.route('/pretty')
+def pretty():
+	return {'pretty_list': pretty_contacts}
+
+@app.route('/address_file')
+def address_file():
+	c = open('contacts.csv', 'r')
+	contacts = c.readlines()
+
+	contents_of_contacts = contacts
+	c.close
+	
+	return {"rolodex": contents_of_contacts}
+# What I need to do is make a pretty verison of this list. Then I will use that list to make rows and colums.
 
 
 # def longestwordforbook():

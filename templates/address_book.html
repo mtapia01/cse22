@@ -52,7 +52,7 @@
 	<li 
 			class="nav-item">
 		<a 
-			class="nav-link active" 
+			class="nav-link " 
 			href="/signup">Sign Up
 		</a>
     </li>
@@ -64,13 +64,13 @@
 		</a>
 	</li>
 			</li>
-			<li 
-				class="nav-item">
-				<a 
-					class="nav-link" 
-					href="/address_book">Address Book
-				</a>
-			</li>
+
+		<li class="nav-item">
+			<a 
+				class="nav-link active" 
+				href="/address_book">Address Book
+			</a>
+		</li>
 	</ul>
 </nav>
 
@@ -85,15 +85,19 @@
 	<link rel="stylesheet" href="static/bootstrap/bootstrap.min.css">
 	<script src="static/jquery/jquery.js"></script>
 	<script src="static/bootstrap/bootstrap.min.js"></script>
-	<script src="static/main.js"></script>
+	<script src="static/address_book.js"></script>
 	<link rel="stylesheet" type="text/css" href="static/css/styles.css">
 </head>
 
 <body>
 	<div class="jumbotron text-center">
 		<h1>
-			Welcome. Feel free to make an account.
+			Address Book
 		</h1>
+		<p> 
+			Add or look for friends and family.
+		</p>
+
 	</div>
 	<div id = "sign-in-and-up" class="container">
 		<h2>
@@ -114,25 +118,37 @@
 		<button id ="sign_up" class ="btn btn-primary">Sign Up</button>
 		<button id ="sign_in" class ="btn btn-primary">Sign In</button>
 	</div>
-		<div class="row" "container-fluid">
-				<div id="board" class="hidden" "col-sm-4">
-					<h3>Hello, what is your name?</h3>
-					<input placeholder="Name" id="inputbox">
-					<br />
-					<br />
-					<h3>What do you want to type?</h3>
-					<input placeholder="Comment" id="discussion_response">
-					<br />
-					<br />
-					<button id="dis-boardbtn" class="btn btn-primary">Submit</button>
-				</div>
-				<div id="posted-Comments" class="hidden" "col-sm-8">
-					<h3>Responses</h3>
-					<div id="responses" />
-				</div>
-			</div>
+	<div id = "search" class = "hidden">
+		<input placeholder="Search" id="search_conatacts">
+	</div>
+	<div id = "favorites" class = "hidden">
+		<button id = "add_to_fav" class = "btn btn-primary">Add To Favorites</button>
+		<h2> 
+			Favorites contacts
+		</h2>
+		<table style="width:100%">
+			<tr>
+				<th>Firstname</th>
+				<th>Lastname</th>
+				<th>Address</th>
+				<th>City</th>
+				<th>State</th>
+				<th>Zip</th>
+				<th>Phone 1</th>
+				<th>Phone</th>
+				<th>Email</th>
+			</tr>
+		</table>
+	</div>
+	<br />
+
+	<div id = "address_info" class = "hidden">
+		<div id = "address_file">
+			
+		<table cellpadding="10px" id="address_book">
+					<td><b>First Name</b></td><td><b>Last Name</b></td><td><b>Address</b></td><td><b>City</b></td><td><b>State</b></td><td><b>Zip</b></td><td><b>Phone 1</b><td><b>Phone</b></td><td><b>Email</b></td></td>
+		</table>
+		</div>
 	</div>
 
-	
-	</div>
 </body>

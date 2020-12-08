@@ -146,7 +146,15 @@ $(document).ready(function (){
 					$("#board").removeClass("hidden");
 					$("#posted-Comments").removeClass("hidden");
 					$("#sign-in-and-up").addClass("hidden");
-				})											
+				})	
+				//lab 8
+				$.get('/address_book', {}, function(signed_response){
+					$("#address_info").removeClass("hidden")
+					$("#favorites").removeClass("hidden")
+					$("#search").removeClass("hidden")
+					$("#").removeClass("hidden")
+
+				})										
 			} 
 			else {
 				alert("Try Again")
@@ -174,41 +182,74 @@ $(document).ready(function (){
 		$("#learn-more").addClass("hidden")
 		$("#huckleberry-learn").removeClass("hidden")
 		$("#show-less").removeClass("hidden")
-		
+		$("#learn-more-bookone").addClass("hidden")
+		$("#picture-of-bookone").addClass("hidden")
 	})
+	// $("#learn-more-bookone").click(function(){
+	// 	$("#learn-more").addClass("hidden")
+	// 	$("#odyssey-learn").removeClass("hidden")
+	// 	$("#show-less").removeClass("hidden")
+	// 	$("#learn-more").addClass("hidden")
+	// 	$("#picture-of-book").addClass("hidden")
+	// 	$("#readbook").addClass("hidden")
+	// })
 	//lab 7 
 	// $("#learn-more").click(function(){
 	// 	$.get('/views', {"view": +1 })
 	// })
 
-	
-
 	$("#readbook").click(function(){
 		$("#learn-more").addClass("hidden")
+		$("#learn-more-bookone").removeClass("hidden")
 		$("#book").removeClass("hidden")
 		$("#picture-of-book").addClass("hidden")
 		$("#stopreading").removeClass("hidden")
 		$("#readbook").addClass("hidden")
+		$("#learn-more-bookone").addClass("hidden")
 	})
+	// $("#readbook-one").click(function(){
+	// 	$("#learn-more").addClass("hidden")
+	// 	$("#learn-more-bookone").addClass("hidden")
+	// 	$("#bookodyssey").removeClass("hidden")
+	// 	$("#picture-of-book").addClass("hidden")
+	// 	$("#picture-of-bookone").addClass("hidden")
+	// 	$("#stopreading-b-one").removeClass("hidden")
+	// 	$("#readbook").addClass("hidden")
+	// })
+	// $("#stopreading-b-one").click(function(){
+	// 	$("#learn-more").removeClass("hidden")
+	// 	$("#learn-more-bookone").removeClass("hidden")
+	// 	$("#book").addClass("hidden")
+	// 	$("#bookodyssey").addClass("hidden")
+	// 	$("#picture-of-book").removeClass("hidden")
+	// 	$("#picture-of-bookone").addClass("hidden")
+	// 	$("#stopreading-b-one").addClass("hidden")
+	// 	$("#readbook").removeClass("hidden")
+	// 	$("#readbook-one").removeClass("hidden")
+	// 	$("#learn-more-bookone").removeClass("hidden")
+	// })
 	$("#stopreading").click(function(){
 		$("#learn-more").removeClass("hidden")
 		$("#book").addClass("hidden")
 		$("#picture-of-book").removeClass("hidden")
 		$("#stopreading").addClass("hidden")
 		$("#readbook").removeClass("hidden")
-
+		$("#learn-more-bookone").removeClass("hidden")
+		$("#picture-of-bookone").removeClass("hidden")
+		$("#learn-more-bookone").removeClass("#hidden")
 	})
 	$("#show-less").click(function(){
 		$("#learn-more").removeClass("hidden")
 		$("#huckleberry-learn").addClass("hidden")
 		$("#show-less").addClass("hidden")
+		$("#learn-more-bookone").addClass("hidden")
 	})
 	// lab7
 	$("#learn-more").click(function(){
 		$.get('/views', {},function(response){
 			view_counter = response["views"]
 			console.log(response)
-			$("#views-on-page").append(view_counter)
+			$("#views-on-page").html(view_counter)
 		})
 	})
 	$.get('/countwords', {}, function(response){
@@ -227,6 +268,10 @@ $(document).ready(function (){
 	$.get('/textofbook', {}, function(response){
 		let book = response['book'];
 		$("#book").html(book);
+	});
+	$.get('/address_file', {}, function(response){
+		let file = response['rolodex'];
+		$("#file").html(file);
 	});
 //Lab 4 things
 	// $("#gamebtn").click(function(){
