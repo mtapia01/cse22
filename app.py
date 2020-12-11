@@ -400,40 +400,43 @@ def address_file():
 	c.close
 	
 	return {"rolodex": contents_of_contacts}
-# What I need to do is make a pretty verison of this list. Then I will use that list to make rows and colums.
+
+@app.route('/add_new')
+def add_new():
+	new_contact = request.args.get('add_newcontact')
+	print(new_contact)
+	c = open('contacts.csv', 'r')
+	contacts = c.readlines()
+	contents_of_contacts = contacts
+	c.close
 
 
-# def longestwordforbook():
-# 	b = open('hfinn11.txt', 'r')
-# 	book = b.read()
+	c = open('contacts.csv', 'a')
+	new_contacts = {'first_name': first_name, 'last_name': last_name, 'address': address, 'city': city, 'state': state, 'zip': zip_code, 'phone_one': phone_one, 'phone': phone, 'email': email}
+	new_info = (json.dumps(new_contacts))
+	c.writelines([new_info, '\n'])
+	c.close()
 
-# 	for i in range(len(items)):
-# 		if len(items[i]) > len(longest):
-# 			longest = items[i]
-# 	return longest
+	return {"rolodex": new_contact}
 
+@app.route('/search')
+def search_func():
+	query = request.args.get("q")
 
-
-#This is not needed anymore. This was lab 4
-# @app.route('/game_check')
-# def game_check():
-# 	user_guess = request.args.get("user_guess").upper()
-# #if a letter is right it will say good job if it is not right it will say try again
-# 	if user_guess == "C":
-# 		return "C"
-# 	elif user_guess == "M":
-# 		return "M"
-# 	elif user_guess == "O":
-# 		return "O"
-# 	elif user_guess == "U":
-# 		return "U"
-# 	elif user_guess == "R":
-# 		return "R"
+	result = []
 	
-# 	else:
-# 		return "Try Again"
+	for i in range(len(pretty_row)):
+		if query.upper() == pretty_row[i]['first_name'].upper()[:len(query)]:
+			result.append(pretty_row[i])
+	result.sort(key=operator.itemgetter('last_name'))
+	return {'result': result}
+
+	
 
 
+
+
+# What I need to do is make a pretty verison of this list. Then I will use that list to make rows and colums.
 
 #=======================================================
 if __name__ == '__main__':

@@ -15,3 +15,6 @@
 .spaceup{
 	margin-top:300px;
 }
+.tableheader thead {
+     display: table-header-group;
+}

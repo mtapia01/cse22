@@ -68,7 +68,7 @@
 		<li class="nav-item">
 			<a 
 				class="nav-link active" 
-				href="/address_book">Address Book
+				href="#">Address Book
 			</a>
 		</li>
 	</ul>
@@ -80,7 +80,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<title>Lab 1 Template</title>
+	<title>Address Book</title>
 
 	<link rel="stylesheet" href="static/bootstrap/bootstrap.min.css">
 	<script src="static/jquery/jquery.js"></script>
@@ -88,7 +88,7 @@
 	<script src="static/address_book.js"></script>
 	<link rel="stylesheet" type="text/css" href="static/css/styles.css">
 </head>
-
+<div class="container-fluid">
 <body>
 	<div class="jumbotron text-center">
 		<h1>
@@ -99,7 +99,7 @@
 		</p>
 
 	</div>
-	<div id = "sign-in-and-up" class="container">
+	<div id = "sign-in-and-up" >
 		<h2>
 			Please enter you information here.
 		</h2>
@@ -122,33 +122,70 @@
 		<input placeholder="Search" id="search_conatacts">
 	</div>
 	<div id = "favorites" class = "hidden">
-		<button id = "add_to_fav" class = "btn btn-primary">Add To Favorites</button>
+		<h2>
+			Add New Contact
+		</h2>
+		<div >
+			<table style= "tableheader" class="table table-bordered table-sm">
+				<thead >
+					<tr >
+						<th>Firstname</th>
+						<th>Lastname</th>
+						<th>Address</th>
+						<th>City</th>
+						<th>State</th>
+						<th>Zip</th>
+						<th>Phone 1</th>
+						<th>Phone</th>
+						<th>Email</th>
+					</tr>
+				</thead>				
+				<tbody>
+					<tr >
+						<td><input size="10%" placeholder="First Name" id="new_firstname"></td>
+						<td><input size="10%" placeholder="Last Name" id="new_lastname"></td>
+						<td><input size="10%" placeholder="Address" id="new_address"></td>
+						<td><input size="10%" placeholder="City" id="new_city"></td>
+						<td><input size="10%" placeholder="State" id="new_state"></td>
+						<td><input size="10%" placeholder="Zip" id="new_zip"></td>
+						<td><input size="20%" placeholder="Phone One" id="new_phoneone"></td>
+						<td><input size="20%" placeholder="Phone" id="new_phone"></td>
+						<td><input placeholder="Email" id="new_email"></td>	
+					</tr >
+				</tbody>
+			</table>
+			<button id = "add_newcontact" class = "btn btn-success">Add a New Contact</button>
+		</div>
+	<div class="container-fluid">
 		<h2> 
 			Favorites contacts
 		</h2>
-		<table style="width:100%">
-			<tr>
-				<th>Firstname</th>
-				<th>Lastname</th>
-				<th>Address</th>
-				<th>City</th>
-				<th>State</th>
-				<th>Zip</th>
-				<th>Phone 1</th>
-				<th>Phone</th>
-				<th>Email</th>
-			</tr>
-		</table>
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th>Firstname</th>
+					<th>Lastname</th>
+					<th>Address</th>
+					<th>City</th>
+					<th>State</th>
+					<th>Zip</th>
+					<th>Phone 1</th>
+					<th>Phone</th>
+					<th>Email</th>
+				</tr>
+			</thead>
+			</table>		
+			<button id = "add_to_fav" class = "btn btn-primary">Add To Favorites</button>
 	</div>
 	<br />
 
 	<div id = "address_info" class = "hidden">
 		<div id = "address_file">
 			
-		<table cellpadding="10px" id="address_book">
+		<table class="table table-bordered table table-hover" id="address_book">
 					<td><b>First Name</b></td><td><b>Last Name</b></td><td><b>Address</b></td><td><b>City</b></td><td><b>State</b></td><td><b>Zip</b></td><td><b>Phone 1</b><td><b>Phone</b></td><td><b>Email</b></td></td>
 		</table>
 		</div>
 	</div>
-
+</div>
 </body>
