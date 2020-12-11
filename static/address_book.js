@@ -105,11 +105,50 @@ $(document).ready(function () {
 		let phone_one = $('#new_phoneone').val()
 		let phone = $('#new_phone').val()
 		let email = $('#new_email').val()
-		$.get('/add_new', {"first_name": first_name, "last_name": last_name, "address": address, "city": city, "state": state, "zip": zip, "phone_one": phone_one, "phone": phone, "email": email}, function(response){
-		console.log(response)
-		alert("You added a new contact")
-			window.location.reload();	
+		let data = {
+			"first_name": first_name,
+			"last_name": last_name,
+			"address": address,
+			"city": city,
+			"state": state,
+			"zip": zip,
+			"phone_one": phone_one,
+			"phone": phone,
+			"email": email
+		}
+		$.get('/add_new', data, function(response){
+			alert("You added a new contact")
+			let	new_contact = response["rolodex"]
+			let first_name = new_contact[0]
+			let last_name = new_contact[1]
+			let address = new_contact[2]
+			let city = new_contact[3]
+			let state = new_contact[4]
+			let zip = new_contact[5]
+			let phone_one = new_contact[6]
+			let phone = new_contact[7]
+			let email = new_contact[8]
+			let line = `<tr><td>${first_name}</td>`
+			line = line + `<td>${last_name}</td>`
+			line = line + `<td>${address}</td>`
+			line = line + `<td>${city}</td>`
+			line = line + `<td>${state}</td>`
+			line = line + `<td>${zip}</td>`
+			line = line + `<td>${phone_one}</td>`
+			line = line + `<td>${phone}</td>`
+			line = line + `<td>${email}</td></tr>`;
+			$("#address_book").append(line);
+			$('#new_firstname').val("") 
+			$('#new_lastname').val("") 
+			$('#new_address').val("") 
+			$('#new_city').val("") 
+			$('#new_state').val("") 
+			$('#new_zip').val("") 
+			$('#new_phoneone').val("") 
+			$('#new_phone').val("") 
+			$('#new_email').val("")	
 		})
+
 	})
 	$("#new_zip").keypress(function(){
 	let value = $("#new_zip").val();
