@@ -21,7 +21,7 @@ $(document).ready(function () {
 	});
 
 
-	$("#search_conatacts").keyup(function(){
+	$("#search_contacts").keyup(function(){
 		let q = $("#search_conatacts").val();
 		$.get("/search", {'q': q}, function(response){
 			$("#").empty();
@@ -42,8 +42,16 @@ $(document).ready(function () {
 				let phone1 = current['phone_one']
 				let phone = current['phone']
 				let email = current['email']
+				let line = `<tr><td>${first_name}</td>`
+				line = line + `<td>${last_name}</td>`
+				line = line + `<td>${address}</td>`
+				line = line + `<td>${city}</td>`
+				line = line + `<td>${state}</td>`
+				line = line + `<td>${zip}</td>`
+				line = line + `<td>${phone1}</td>`
+				line = line + `<td>${phone}</td>`
+				line = line + `<td>${email}</td></tr>`;
 
-				let line = `<tr><td>${first_name}</td><td>${last_name}</td><td>${address}</td><td>${city}</td><td>${state}</td><td>${zip}</td><td>${phone1}</td><td>${phone}</td><td>${email}</td></tr>`;
 
 				$("#address_book").append(line);
 			}
@@ -88,16 +96,16 @@ $(document).ready(function () {
 	// add_newcontact
 	$("#add_newcontact").click(function() {
 		// alert("hello")
-		let first_name = 'new_first_name'
-		let last_name = 'new_last_name'
-		let address = 'new_address'
-		let city = 'new_city'
-		let state = 'new_state'
-		let zip = 'new_zip'
-		let phoneone = 'new_phone_one'
-		let phone = 'new_phone'
-		let email = 'new_email'
-		$.get('/add_new', {"first_name": first_name, "last_name": last_name, "address": address, "city": city, "state": state, "zip": zip, "phoneone": phoneone, "phone": phone, "email": email}, function(response){
+		let first_name = $('#new_firstname').val()
+		let last_name = $('#new_lastname').val()
+		let address = $('#new_address').val()
+		let city = $('#new_city').val()
+		let state = $('#new_state').val()
+		let zip = $('#new_zip').val()
+		let phone_one = $('#new_phoneone').val()
+		let phone = $('#new_phone').val()
+		let email = $('#new_email').val()
+		$.get('/add_new', {"first_name": first_name, "last_name": last_name, "address": address, "city": city, "state": state, "zip": zip, "phone_one": phone_one, "phone": phone, "email": email}, function(response){
 		console.log(response)
 		alert("You added a new contact")
 			window.location.reload();	

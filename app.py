@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS
-
+import csv
+import pdb
 app = Flask(__name__, static_folder = 'static', template_folder = 'templates')
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 CORS(app)
@@ -169,7 +170,7 @@ b = open('hfinn11.txt', 'r')
 book = b.read()
 
 content_of_book = b.read()
-b.close
+b.close()
 
 def bookinfo():
 	someText = someText.replace('\n', ' ')
@@ -198,7 +199,7 @@ def longest():
 def longestwords_b1():
 	b_one = open('odyssey.txt', 'r')
 	book_one = b_one.read()
-	b_one.close
+	b_one.close()
 
 	someText = book_one.replace('\n', ' ')
 	someText = someText.replace('-', ' ')
@@ -220,29 +221,13 @@ def longestwords_b1():
 			longest = items[i]
 	return {"longest": longest}
 
-# @app.route('/textofbook')
-# def textofbook_b1():
-# 	b = open('odyssey.txt', 'r')
-# 	book = b.read()
-
-# 	content_of_book = book
-# 	b.close
-# 	someText = book.replace('\n', ' ')
-# 	someText = someText.replace('-', ' ')
-# 	someText = someText.replace('/', ' ')
-# 	someText = someText.replace(':', ' ')
-
-	
-# 	book = someText
-# 	return {"book": content_of_book}
-
 @app.route ('/countwords')
 def countwords_b1():
 	b_one = open('odyssey.txt', 'r')
 	book_one = b_one.read()
 	
 	numberOfWords = word_count(book_one)
-	b_one.close
+	b_one.close()
 	return {"number_of_words": numberOfWords}
 # end of information aobut .txt
 
@@ -253,7 +238,7 @@ def countwords_b1():
 def longestwords():
 	b = open('hfinn11.txt', 'r')
 	book = b.read()
-	b.close
+	b.close()
 
 	someText = book.replace('\n', ' ')
 	someText = someText.replace('-', ' ')
@@ -282,7 +267,7 @@ def countwords():
 	book = b.read()
 
 	numberOfWords = word_count(book)
-	b.close
+	b.close()
 	return {"number_of_words": numberOfWords}
 
 @app.route('/textofbook')
@@ -291,7 +276,7 @@ def textofbook():
 	book = b.read()
 
 	content_of_book = book
-	b.close
+	b.close()
 	someText = book.replace('\n', ' ')
 	someText = someText.replace('-', ' ')
 	someText = someText.replace('/', ' ')
@@ -361,34 +346,42 @@ def views():
 
 	return view_dict
 
-c = open('contacts.csv', 'r')
-contacts = c.readlines()
-c.close
-
-for i in range(len(contacts)):
-	contacts[i] = contacts[i].strip()
-
-pretty_contacts = []
-
-for i in range(len(contacts)):
-	row = contacts[i]      # "first,last,Address,City,State,Zip,Phone 1,Phone,Email"
-	items = row.split(',')    # ["first", "last", "Address", "City", "State", "Zip", "Phone 1", "Phone", "Email"]
-	first_name = items[0]     # "first"
-	last_name = items[1]      # "last"
-	address = items[2]	      # "address"
-	city = items[3]           # "city"
-	state = items[4]		  # "state"
-	zip_code = items[5]  	  # "zip"
-	phone_one = items[6]      # "phone 1"
-	phone = items[7]	      # "phone"
-	email = items[8]		  # "email"
-
-
-	pretty_row = {'first_name': first_name, 'last_name': last_name, 'address': address, 'city': city, 'state': state, 'zip': zip_code, 'phone_one': phone_one, 'phone': phone, 'email': email}
-	pretty_contacts.append(pretty_row)
-
 @app.route('/pretty')
 def pretty():
+	c = open('contacts.csv', 'r')
+	contacts = c.readlines()
+	c.close()
+
+	for i in range(len(contacts)):
+		contacts[i] = contacts[i].strip()
+
+	pretty_contacts = []
+
+	for i in range(len(contacts)):
+		row = contacts[i] 
+		items = row.split(',')    
+		first_name = items[0]  
+		last_name = items[1]   
+		address = items[2]	   
+		city = items[3]        
+		state = items[4]	
+		zip_code = items[5]  
+		phone_one = items[6]     
+		phone = items[7]	   
+		email = items[8]	
+
+		pretty_row = {
+			'first_name': first_name,
+			'last_name': last_name, 
+			'address': address, 
+			'city': city,
+			'state': state,
+			'zip': zip_code,
+			'phone_one': phone_one,
+			'phone': phone,
+			'email': email
+		}	
+		pretty_contacts.append(pretty_row)
 	return {'pretty_list': pretty_contacts}
 
 @app.route('/address_file')
@@ -397,27 +390,38 @@ def address_file():
 	contacts = c.readlines()
 
 	contents_of_contacts = contacts
-	c.close
+	c.close()
 	
 	return {"rolodex": contents_of_contacts}
 
 @app.route('/add_new')
 def add_new():
-	new_contact = request.args.get('add_newcontact')
-	print(new_contact)
-	c = open('contacts.csv', 'r')
-	contacts = c.readlines()
-	contents_of_contacts = contacts
-	c.close
+	first_name = request.args.get("first_name")
+	last_name = request.args.get("last_name")
+	address = request.args.get("address")
+	city = request.args.get("city")
+	state = request.args.get("state")
+	zip_code = request.args.get("zip")
+	phone_one = request.args.get("phone_one")
+	phone = request.args.get("phone")
+	email = request.args.get("email")
 
+	new_contact = [
+		first_name, 
+		last_name, 
+		address, 
+		city, 
+		state, 
+		zip_code, 
+		phone_one, 
+		phone, 
+		email
+	]
+	with open('contacts.csv', 'a', newline='\n') as file:
+		writer = csv.writer(file)
+		writer.writerow(new_contact)
 
-	c = open('contacts.csv', 'a')
-	new_contacts = {'first_name': first_name, 'last_name': last_name, 'address': address, 'city': city, 'state': state, 'zip': zip_code, 'phone_one': phone_one, 'phone': phone, 'email': email}
-	new_info = (json.dumps(new_contacts))
-	c.writelines([new_info, '\n'])
-	c.close()
-
-	return {"rolodex": new_contact}
+	return {"rolodex": new_contact}, 201
 
 @app.route('/search')
 def search_func():
